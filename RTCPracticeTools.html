@@ -1,0 +1,190 @@
+<!--
+RTC Practice Tools
+Author: Rickey Chang
+Ver: 1.11
+Date: 1 March 2022
+License: GNU GPL v3
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="./css/tailwind-2.2.19.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="fixed h-32 w-full bg-gray-100 p-2">
+      <div class="text-4xl font-black">
+        RTC Practice Tools
+      </div>
+      <div>
+        <span class="text-xl font-bold">
+          Navigation: 
+        </span>
+        <div class="inline-flex mt-4 gap-4">
+          <a href="#aSetManager"  class="w-32 text-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Set Manager</a>
+          <a href="#aPresets"     class="w-32 text-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Presets</a>
+          <a href="#aShuffle"     class="w-32 text-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Shuffle</a>
+          <a href="#aAltShuffle"  class="w-32 text-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Alt Shuffle</a>
+          <a href="#a3by5Shuffle" class="w-32 text-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">3x5x3 Shuffle</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-32 p-2">
+      <a id="aSetManager" class="-top-32 invisible block relative"></a>
+      <div id="secSetManager" class="border-2 mt-2 p-2 bg-yellow-100">
+        <div class="text-2xl font-bold">
+          Set Manager
+        </div>
+        <div class="text-sm">
+          <span class="font-bold">Clear</span> removes the contents of Current Set. 
+          <span class="font-bold">Create</span> creates a new set based on the contents of Current Set. 
+          <span class="font-bold">Update</span> saves the contents of Current Set to the selected item in Saved Sets. 
+          <span class="font-bold">Delete</span> removes the selected item from Saved Sets.
+          <span class="font-bold">Copy to Clipboard</span> copies the contents of Current Set to the clipboard.
+        </div>
+        <div class="flex mt-8 gap-x-9">
+
+          <div>
+            <div class="font-bold text-lg">
+              Saved Sets
+            </div>
+            <select id="setList" size="19" class="border-2 w-96 h-96 overflow-auto">
+            </select>
+          </div>
+          <div class="w-60 flex-shrink-0">
+              <div class="grid grid-cols-1 gap-4 h-full place-content-center">
+                  <button id="btnSMClear"  class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Clear</button>
+                  <button id="btnSMCreate" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Create</button>
+                  <button id="btnSMUpdate" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Update</button>
+                  <button id="btnSMDelete" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Delete</button>
+                  <button id="btnSMClip"   class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Copy to Clipboard</button>
+              </div>
+          </div>
+          <div>
+            <div class="font-bold text-lg">
+              Current Set
+            </div>
+            <textarea id="currentSet" class="font-mono border-2 w-96 h-96" rows="18" cols="30"></textarea>
+          </div>
+        </div>
+      </div>
+      <a id="aPresets" class="-top-32 invisible block relative"></a>
+      <div id="secPresets" class="border-2 mt-2 p-2 bg-red-100">
+        <div class="text-2xl font-bold">
+          Presets
+        </div>
+        <div class="text-sm"></div>
+        <div class="flex mt-8 gap-x-9">
+          <div>
+            <div class="font-bold text-lg">
+              Preset Results
+            </div>
+            <textarea id="presetResult" class="font-mono border-2 w-96 h-96" rows="18" cols="30"></textarea>
+          </div>
+          <div class="w-60 flex-shrink-0">
+            <div class="grid grid-cols-1 gap-4 h-full place-content-center">
+              <div class="shadow-sm text-sm font-medium rounded-md">Number of sets:
+                <input type="number" value="1" min="1" id="inPreNum" class="w-12 float-right text-sm font-medium rounded-md text-right">
+              </div><div class="shadow-sm text-sm font-medium rounded-md">Break after this many lines:
+                <input type="number" value="5" min="0" id="inPreBreak" class="w-12 float-right text-sm font-medium rounded-md text-right">
+              </div>
+              <button id="btnPreNumbers"    class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Numbers 1-99</button>
+              <button id="btnPreMonthsDays" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Months & Days</button>
+              <button id="btnPreLgNumbers"  class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Large Numbers</button>
+              <button id="btnPreClip"       class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Copy to Clipboard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a id="aShuffle" class="-top-32 invisible block relative"></a>
+      <div id="secShuffle" class="border-2 mt-2 p-2 bg-green-100">
+        <div class="text-2xl font-bold">
+          Shuffle
+        </div>
+        <div class="text-sm">
+          <!-- Instructions go here -->
+        </div>
+        <div class="flex mt-8 gap-x-9">
+          <div>
+            <div class="font-bold text-lg">
+              Shuffle Result
+            </div>
+            <textarea id="shuffleResult" class="font-mono border-2 w-96 h-96" rows="18" cols="30"></textarea>
+          </div>
+          <div class="w-60 flex-shrink-0">
+            <div class="grid grid-cols-1 gap-4 h-full place-content-center">
+              <div class="shadow-sm text-sm font-medium rounded-md">Number of sets:
+                <input type="number" value="5" min="1" id="inShfNum" class="w-12 float-right text-sm font-medium rounded-md text-right">
+              </div>
+              <div class="shadow-sm text-sm font-medium rounded-md">Break after this many lines:
+                <input type="number" value="5" min="0" id="inShfBreak" class="w-12 float-right text-sm font-medium rounded-md text-right">
+              </div>
+              <button id="btnShfShuffle" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Shuffle</button>
+              <button id="btnShfClip"    class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Copy to Clipboard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a id="aAltShuffle" class="-top-32 invisible block relative"></a>
+      <div id="secAltShuffle" class="border-2 mt-2 p-2 bg-blue-100">
+        <div class="text-2xl font-bold">
+          Alternating Shuffle
+        </div>
+        <div class="text-sm">
+          <!-- Instructions go here -->
+        </div>
+        <div class="flex mt-8 gap-x-9">
+          <div>
+            <div class="font-bold text-lg">
+              Alternating Shuffle Result
+            </div>
+            <textarea id="altResult" class="font-mono border-2 w-96 h-96" rows="18" cols="30"></textarea>
+          </div>
+          <div class="w-60 flex-shrink-0">
+            <div class="grid grid-cols-1 gap-4 h-full place-content-center">
+              <div class="shadow-sm text-sm font-medium rounded-md">Break after this many lines:
+                <input type="number" id="inAltBreak" value="5" min="0" class="w-12 float-right text-sm font-medium rounded-md text-right">
+              </div>
+              <button id="btnAltShuffle" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Alternating Shuffle</button>
+              <button id="btnAltClip"    class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Copy to Clipboard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a id="a3by5Shuffle" class="-top-32 invisible block relative"></a>
+      <div id="sec3by5Shuffle" class="border-2 mt-2 p-2 bg-pink-100">
+        <div class="text-2xl font-bold">
+          3x5x3 Shuffle
+        </div>
+        <div class="text-sm">
+          If your set is less than five lines, the software will backfill up to five lines using what exists.
+        </div>
+        <div class="flex mt-8 gap-x-9">
+          <div>
+            <div class="font-bold text-lg">
+              3x5x3 Shuffle Result
+            </div>
+            <textarea id="byResult" class="font-mono border-2 w-96 h-96" rows="18" cols="30"></textarea>
+          </div>
+          <div class="w-60 flex-shrink-0">
+            <div class="grid grid-cols-1 gap-4 h-full place-content-center">
+              <div class="shadow-sm text-sm font-medium rounded-md">Break after this many lines:
+                <input type="number" value="5" min="0" id="inByBreak" class="w-12 float-right text-sm font-medium rounded-md text-right">
+              </div>
+              <button id="btnByShuffle" class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">3x5x3 Shuffle</button>
+              <button id="btnByClip"    class="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:text-white hover:bg-indigo-400">Copy to Clipboard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="./js/main.js"></script>
+    <div class="text-xs font-mono">
+    </div>
+  </body>
+</html>
